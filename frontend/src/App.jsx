@@ -6,10 +6,8 @@ import Gallery from './components/gallery';
 
 
 function App() {
-  
-
   return (
-    <div>
+    <div className='background'>
       <Nav />
       
       <div style={{ position: 'relative', display: 'inline-block', width: '100%' }}>

@@ -1,0 +1,22 @@
+/* Global styles for the application */
+.background {
+    background-color: #f0f0f0;
+    min-height: 100vh;
+  
+}
+
+.photo-card {
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.photo-card:hover {
+  transform: scale(1.1);
+}
+
+.containerCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}   
+
