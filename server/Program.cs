@@ -1,5 +1,5 @@
-using Npgsql;
-using DotNetEnv;
+using Npgsql; 
+using DotNetEnv; 
 
 Env.Load();
 
@@ -17,7 +17,7 @@ var app = builder.Build();
 
 app.UseCors();
 
-
+//get by id
 app.MapGet("/{id}", async (int id, NpgsqlDataSource db) =>
 {
     try
@@ -46,6 +46,7 @@ app.MapGet("/{id}", async (int id, NpgsqlDataSource db) =>
     }
 });
 
+//get all
 app.MapGet("/all", async (NpgsqlDataSource db) =>
 {
     try
@@ -85,6 +86,7 @@ app.MapGet("/all", async (NpgsqlDataSource db) =>
     }
 });
 
+//create new entry
 app.MapPost("/add", async (NewEntry entry, NpgsqlDataSource db) =>
 {
     try
@@ -97,6 +99,23 @@ app.MapPost("/add", async (NewEntry entry, NpgsqlDataSource db) =>
         cmd.Parameters.Add(new Npgsql.NpgsqlParameter("image", NpgsqlTypes.NpgsqlDbType.Bytea) { Value = (object?)imageBytes ?? DBNull.Value });
         var id = await cmd.ExecuteScalarAsync();
         return Results.Created($"/{id}", new { id });
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Database error: {ex.Message}");
+        return Results.Problem(ex.Message);
+    }
+});
+
+//delete entry by id
+app.MapDelete("/delete/{id}", async (int id, NpgsqlDataSource db) =>
+{
+    try
+    {   await using var cmd = db.CreateCommand("DELETE FROM aboutbio WHERE id = @id");
+        cmd.Parameters.AddWithValue("id", id);
+        var affected = await cmd.ExecuteNonQueryAsync();
+        if (affected == 0) return Results.NotFound("Not found to delete.");
+        return Results.Ok($"Deleted aboutbio with id {id}.");
     }
     catch (Exception ex)
     {

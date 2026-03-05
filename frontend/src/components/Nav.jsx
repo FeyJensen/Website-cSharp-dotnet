@@ -11,6 +11,7 @@ function Nav() {
           </a>
           <a className="nav-link px-2 fs-5" href="/">Home</a>
           <a className="nav-link px-2 fs-5" href="/photos">Photos</a>
+          <a className="nav-link px-2 fs-5" href="/resume">Resume</a>
         </div>
         <button type="button" className="btn btn-outline-secondary ms-auto" onClick={() => window.location.href = 'mailto:feyviolin@gmail.com'}>Message Me</button>
       </div>

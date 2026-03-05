@@ -1,17 +1,39 @@
 /* Global styles for the application */
+body {
+  margin: 0;
+}
+
 .background {
     background-color: #f0f0f0;
     min-height: 100vh;
-  
+    display: flex;
+    flex-direction: column;
+}
+
+.background > .container {
+  flex: 1;
 }
 
 .photo-card {
   transition: transform 0.2s;
   cursor: pointer;
+  position: relative;
 }
 
 .photo-card:hover {
   transform: scale(1.1);
+}
+
+.photo-card .delete-btn {
+  display: none;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+}
+
+.photo-card:hover .delete-btn {
+  display: block;
 }
 
 .containerCenter {
