@@ -8,3 +8,11 @@ server/obj/
 server/appsettings.Development.json
 server/*.user
 
+frontend/node_modules/
+frontend/dist/
+
+.DS_Store
+
+.env
+
+
