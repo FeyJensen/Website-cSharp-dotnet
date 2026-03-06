@@ -27,7 +27,7 @@ function Photos() {
       <div className="container my-4">
         <h1 className="mb-4 text-center">Photos</h1>
         <h4 className="mb-4 text-center" style={{ color: '#555' }}>Click on a Photo to View Details</h4>
-        <PhotoGrid entries={entries} />
+        <PhotoGrid entries={entries} onDelete={loadEntries} />
         <AddPhotoForm onAdd={loadEntries} />
       </div>
 

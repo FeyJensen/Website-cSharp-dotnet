@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-function PhotoGrid({ entries }) {
+function PhotoGrid({ entries, onDelete }) {
   const navigate = useNavigate();
   
   const handleDelete = (id) => {
@@ -9,7 +9,7 @@ function PhotoGrid({ entries }) {
     fetch(`/api/delete/${id}`, { method: 'DELETE' })
       .then((res) => {
         if (!res.ok) throw new Error('Failed to delete photo');
-        navigate('/photos'); // Refresh the page after deletion
+        onDelete();
       })
       .catch((err) => alert(err.message));
   };

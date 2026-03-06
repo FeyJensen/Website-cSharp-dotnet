@@ -1,7 +1,7 @@
-using Npgsql; 
+using Npgsql;
 using DotNetEnv; 
 
-Env.Load();
+Env.Load(); 
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,9 +13,9 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(policy =>
         policy.WithOrigins("http://localhost:5173").AllowAnyMethod().AllowAnyHeader()));
 
-var app = builder.Build();
+var app = builder.Build(); 
 
-app.UseCors();
+app.UseCors(); 
 
 //get by id
 app.MapGet("/{id}", async (int id, NpgsqlDataSource db) =>
@@ -23,8 +23,8 @@ app.MapGet("/{id}", async (int id, NpgsqlDataSource db) =>
     try
     {
         await using var cmd = db.CreateCommand("SELECT name, occupation, experience, image FROM aboutbio WHERE id = @id");
-        cmd.Parameters.AddWithValue("id", id);
-        await using var reader = await cmd.ExecuteReaderAsync();
+        cmd.Parameters.AddWithValue("id", id); 
+        await using var reader = await cmd.ExecuteReaderAsync(); 
         if (!await reader.ReadAsync()) return Results.NotFound("No aboutbio found.");
         var name = reader.GetString(0);
         var occupation = reader.GetString(1);
@@ -63,7 +63,7 @@ app.MapGet("/all", async (NpgsqlDataSource db) =>
             var imageBytes = reader.IsDBNull(4) ? null : reader.GetFieldValue<byte[]>(4);
             string? mimeType = null;
             if (imageBytes != null)
-                mimeType = imageBytes.Length > 3 && imageBytes[0] == 0x89 && imageBytes[1] == 0x50 
+                mimeType = imageBytes.Length > 3 && imageBytes[0] == 0x89 && imageBytes[1] == 0x50
                     ? "image/png" : "image/jpeg";
             results.Add(new
             {
@@ -73,8 +73,8 @@ app.MapGet("/all", async (NpgsqlDataSource db) =>
                 experience,
                 description = $"This is {name}. A {occupation} with {experience} years of experience.",
                 image = imageBytes != null ? Convert.ToBase64String(imageBytes) : null,
-                mimeType 
-            }); 
+                mimeType
+            });
         }
         if (results.Count == 0) return Results.NotFound("No aboutbio found.");
         return Results.Ok(results);
@@ -111,7 +111,8 @@ app.MapPost("/add", async (NewEntry entry, NpgsqlDataSource db) =>
 app.MapDelete("/delete/{id}", async (int id, NpgsqlDataSource db) =>
 {
     try
-    {   await using var cmd = db.CreateCommand("DELETE FROM aboutbio WHERE id = @id");
+    {
+        await using var cmd = db.CreateCommand("DELETE FROM aboutbio WHERE id = @id");
         cmd.Parameters.AddWithValue("id", id);
         var affected = await cmd.ExecuteNonQueryAsync();
         if (affected == 0) return Results.NotFound("Not found to delete.");
@@ -124,11 +125,11 @@ app.MapDelete("/delete/{id}", async (int id, NpgsqlDataSource db) =>
     }
 });
 
-app.Run(); 
-record NewEntry(string Name, string Occupation, int Experience, string? ImageBase64); 
+app.Run();
+record NewEntry(string Name, string Occupation, int Experience, string? ImageBase64);
 
 
 
 
 
- 
+

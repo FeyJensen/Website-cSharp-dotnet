@@ -29,7 +29,7 @@ function AddPhotoForm({ onAdd }) {
       if (!res.ok) throw new Error('Failed to add entry.');
       setForm({ name: '', occupation: '', experience: '', imageBase64: null });
       document.getElementById('formFile').value = '';
-      onAdd();
+      onAdd(); 
     } catch (err) {
       setSubmitError(err.message);
     }

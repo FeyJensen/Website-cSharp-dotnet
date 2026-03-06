@@ -8,15 +8,15 @@ function App() {
   return (
     <div className='background'>
       <Nav />
-      <HomeHero />  
+      <HomeHero />
 
       <div>
         <h2 className="text-center mt-5" style={{ color: '#333' }}>About Me</h2>
         <p className="text-center mt-3" style={{ color: '#555', maxWidth: '600px', margin: '0 auto' }}>
           I am a software developer in Portland, OR with experience in full-stack development. I am skilled
-          in C#, .NET, and React but my passion lies in front-end developement. All those were used to 
-          build this website along with the bootstrap library. I enjoy building UI's that are 
-          both functional and beautiful. 
+          in C#, .NET, and React but my passion lies in front-end developement. All those were used to
+          build this website along with the bootstrap library. I enjoy building UI's that are
+          both functional and beautiful.
           In my free time, I work on personal projects and contribute to a private repo for a startup called Balanx-bio
         </p>
       </div>
