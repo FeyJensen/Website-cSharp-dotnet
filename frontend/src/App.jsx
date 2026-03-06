@@ -32,7 +32,7 @@ function App() {
 
         <Gallery />
 
-        <button type="button" className="btn d-block mx-auto mt-3" style={{ backgroundColor: '#F1641E' }} onClick={() => window.open('https://www.etsy.com/shop/Skyeeclisse', '_blank')}>Visit My Etsy Shop</button>
+        <button type="button" className="btn d-block mx-auto mt-3 mb-5" style={{ backgroundColor: '#F1641E' }} onClick={() => window.open('https://www.etsy.com/shop/Skyeeclisse', '_blank')}>Visit My Etsy Shop</button>
       </div>
       <Footer />
     </div>
